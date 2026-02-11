@@ -10,6 +10,7 @@ from app import crud
 from app.auth import require_grant
 from app.db import Base, engine, get_db
 from app.models import Grant
+from app.ui_routes import router as ui_router
 from app.schemas import (
     ClaimOut,
     EntityOut,
@@ -115,3 +116,6 @@ def confirm_claim(
 
     db.commit()
     return EntityOut(id=entity.id, type=entity.type, data=entity.data)
+
+
+app.include_router(ui_router)

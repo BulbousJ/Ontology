@@ -106,3 +106,25 @@ curl -s -X POST "$BASE/claims/$CLAIM_ID/confirm" \
 ## Notes
 - Tables are created automatically on startup.
 - No Alembic migrations in v1.
+
+
+## 5) Built-in Web UI
+
+1. Start the server:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+2. Create a token via `/dev/grants` (see example above).
+3. Open `http://127.0.0.1:8000/ui` in your browser.
+4. Paste the token once in the Bearer token box and click **Save token**.
+5. Use tabs:
+   - **Entities**: list entities and inspect one entity JSON
+   - **Claims**: view proposed claims and confirm them
+   - **Write**: submit `entity_type`, `match` JSON, and `patch` JSON
+   - **Query**: run search and view card results
+
+Additional secured API routes used by the UI:
+- `GET /api/entities?type=&limit=50&offset=0`
+- `GET /api/entity/{entity_id}`
